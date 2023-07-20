@@ -1,6 +1,7 @@
 
 import { Link, useNavigate } from "react-router-dom";
 import CardsContainer from "../../components/cardsContainer/CardsContainer";
+import Pagination from "../../components/pagination/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductrToOrder } from "../../redux/actions";
 
