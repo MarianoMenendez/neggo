@@ -6,26 +6,23 @@ import { Link } from "react-router-dom";
 import Pagination from "../../components/pagination/Pagination";
 
 export default function AdminPanel() {
-  const [productPerPage, setProductPerPage] = useState(60);
   const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(10);
 
-  const lastIndex = currentPage * productPerPage;
-  const firstIndex = lastIndex - productPerPage;
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
 
   useStoreMount();
   const products = useSelector((state) => state.products);
-  const totalProducts = products.length;
+  const currentProducts = products.slice(indexOfFirstPost, indexOfLastPost);
+  const howManyPages = Math.ceil(products.length / postsPerPage);
+
   return (
     <div>
       <h1>HOLI SOY EL ADMIN PANEL</h1>
       <Link to="/cart">Carrito</Link>
-      <CardsContainer products={products} />
-      <Pagination
-        productPerPage={productPerPage}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        totalProducts={totalProducts}
-      />
+      <CardsContainer products={currentProducts} />
+      <Pagination pages={howManyPages} setCurrentPage={setCurrentPage} />
     </div>
   );
 }

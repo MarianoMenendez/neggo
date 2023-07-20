@@ -1,64 +1,80 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-export default function Pagination({
-  productPerPage,
-  currentPage,
-  setCurrentPage,
-  totalProducts,
-}) {
-  const pageNumber = [];
-  for (let i = 1; i <= Math.ceil(totalProducts / productPerPage); i++) {
-    pageNumber.push(i);
+function Pagination({ pages = 10, setCurrentPage }) {
+  const numberOfPages = [];
+  for (let i = 1; i <= pages; i++) {
+    numberOfPages.push(i);
   }
 
-  const onPreviusPage = () => {
-    setCurrentPage(currentPage - 1);
-  };
+  const [currentButton, setCurrentButton] = useState(1);
+  const [arrOfCurrButtons, setArrOfCurrButtons] = useState([]);
 
-  const onNextPage = () => {
-    setCurrentPage(currentPage + 1);
-  };
+  useEffect(() => {
+    let tempNumberOfPages = [...arrOfCurrButtons];
 
-  const onSpecificPage = (n) => {
-    setCurrentPage(n);
-  };
+    let dotsInitial = "...";
+    let dotsLeft = "... ";
+    let dotsRight = " ...";
+
+    if (numberOfPages.length < 6) {
+      tempNumberOfPages = numberOfPages;
+    } else if (currentButton <= 3) {
+      tempNumberOfPages = [...numberOfPages.slice(0, 5), dotsRight, numberOfPages.length];
+    } else if (currentButton === 4) {
+      tempNumberOfPages = [1, 2, 3, 4, 5, dotsRight, numberOfPages.length];
+    } else if (currentButton > 4 && currentButton < numberOfPages.length - 2) {
+      const sliced = numberOfPages.slice(currentButton - 2, currentButton + 1);
+      tempNumberOfPages = [1, dotsLeft, ...sliced, dotsRight, numberOfPages.length];
+    } else if (currentButton >= numberOfPages.length - 2) {
+      tempNumberOfPages = [1, dotsLeft, ...numberOfPages.slice(numberOfPages.length - 4)];
+    }
+
+    setArrOfCurrButtons(tempNumberOfPages);
+    setCurrentPage(currentButton);
+  }, [currentButton]);
 
   return (
-    <nav
-      className="pagination is-centered"
-      role="navigation"
-      aria-label="pagination"
-    >
-      <a
-        className={`pagination-previous ${
-          currentPage === 1 ? "is-disabled" : ""
-        }`}
-        onClick={onPreviusPage}
-      >
-        Previous
-      </a>
-      <a
-        className={`pagination-next ${
-          currentPage >= pageNumber.length ? "is-disabled" : ""
-        }`}
-        onClick={onNextPage}
-      >
-        Next page
-      </a>
-      <ul className="pagination-list">
-        {pageNumber.map((noPage) => (
-          <li key={noPage}>
+    <nav aria-label="Page navigation">
+      <ul className="pagination justify-content-center">
+        <li className={`page-item ${currentButton === 1 ? "disabled" : ""}`}>
+          <a
+            href="#"
+            className="page-link"
+            onClick={() => setCurrentButton((prev) => (prev <= 1 ? prev : prev - 1))}
+          >
+            Prev
+          </a>
+        </li>
+
+        {arrOfCurrButtons.map((item, index) => (
+          <li
+            key={index}
+            className={`page-item ${currentButton === item ? "active" : ""}`}
+          >
             <a
-              className={`pagination-link ${
-                noPage === currentPage ? "is-current" : null
-              }`}
-              onClick={() => onSpecificPage(noPage)}
+              href="#"
+              className="page-link"
+              onClick={() => setCurrentButton(item)}
             >
-              {noPage}
+              {item}
             </a>
           </li>
         ))}
+
+        <li className={`page-item ${currentButton === numberOfPages.length ? "disabled" : ""}`}>
+          <a
+            href="#"
+            className="page-link"
+            onClick={() =>
+              setCurrentButton((prev) => (prev >= numberOfPages.length ? prev : prev + 1))
+            }
+          >
+            Next
+          </a>
+        </li>
       </ul>
     </nav>
   );
 }
+
+export default Pagination;
