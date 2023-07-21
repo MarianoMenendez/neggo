@@ -3,11 +3,11 @@ import CardElement from "../cardsElement/CardElement";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
-export default function CardsContainer({ products }) {
 
+export default function CardsContainer({ products }) {
   return (
-    <div style={{ maxWidth: "100%", overflowX: "hidden", overflowY: "auto" }}>
-      <div className="d-flex flex-wrap">
+    <div className="d-flex justify-content-center custom-container mt-4 mb-3">
+      <div className="d-flex flex-wrap justify-content-center">
         {products?.map((product) => (
           <CardElement
             key={product.id}
