@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-function Pagination({ pages = 10, setCurrentPage }) {
+function Pagination({ pages = 10, currentPage, setCurrentPage }) {
   const numberOfPages = [];
   for (let i = 1; i <= pages; i++) {
     numberOfPages.push(i);
   }
 
-  const [currentButton, setCurrentButton] = useState(1);
   const [arrOfCurrButtons, setArrOfCurrButtons] = useState([]);
 
   useEffect(() => {
-    let tempNumberOfPages = [...arrOfCurrButtons];
+    let tempNumberOfPages = [];
 
     let dotsInitial = "...";
     let dotsLeft = "... ";
@@ -18,14 +17,14 @@ function Pagination({ pages = 10, setCurrentPage }) {
 
     if (numberOfPages.length < 6) {
       tempNumberOfPages = numberOfPages;
-    } else if (currentButton >= 1 && currentButton <= 3) {
+    } else if (currentPage >= 1 && currentPage <= 3) {
       tempNumberOfPages = [1, 2, 3, 4, dotsInitial, numberOfPages.length];
-    } else if (currentButton === 4) {
+    } else if (currentPage === 4) {
       const sliced = numberOfPages.slice(0, 5);
       tempNumberOfPages = [...sliced, dotsInitial, numberOfPages.length];
-    } else if (currentButton > 4 && currentButton < numberOfPages.length - 2) {
-      const sliced1 = numberOfPages.slice(currentButton - 2, currentButton);
-      const sliced2 = numberOfPages.slice(currentButton, currentButton + 1);
+    } else if (currentPage > 4 && currentPage < numberOfPages.length - 2) {
+      const sliced1 = numberOfPages.slice(currentPage - 2, currentPage);
+      const sliced2 = numberOfPages.slice(currentPage, currentPage + 1);
       tempNumberOfPages = [
         1,
         dotsLeft,
@@ -34,29 +33,31 @@ function Pagination({ pages = 10, setCurrentPage }) {
         dotsRight,
         numberOfPages.length,
       ];
-    } else if (currentButton > numberOfPages.length - 3) {
+    } else if (currentPage > numberOfPages.length - 3) {
       const sliced = numberOfPages.slice(numberOfPages.length - 4);
       tempNumberOfPages = [1, dotsLeft, ...sliced];
-    } else if (currentButton === dotsInitial) {
-      setCurrentButton(arrOfCurrButtons[arrOfCurrButtons.length - 3] + 1);
-    } else if (currentButton === dotsRight) {
-      setCurrentButton(arrOfCurrButtons[3] + 2);
-    } else if (currentButton === dotsLeft) {
-      setCurrentButton(arrOfCurrButtons[3] - 2);
+    } else if (currentPage === dotsInitial) {
+      setCurrentPage(arrOfCurrButtons[arrOfCurrButtons.length - 3] + 1);
+    } else if (currentPage === dotsRight) {
+      setCurrentPage(arrOfCurrButtons[3] + 2);
+    } else if (currentPage === dotsLeft) {
+      setCurrentPage(arrOfCurrButtons[3] - 2);
     }
 
     setArrOfCurrButtons(tempNumberOfPages);
-    setCurrentPage(currentButton);
-  }, [currentButton]);
+  }, [currentPage]);
 
   return (
     <nav aria-label="Page navigation">
       <ul className="pagination justify-content-center">
-        <li className={`page-item ${currentButton === 1 ? "disabled" : ""}`}>
+        <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
           <a
             href="#"
             className="page-link"
-            onClick={() => setCurrentButton((prev) => (prev <= 1 ? prev : prev - 1))}
+            onClick={(e) => {
+              e.preventDefault(); 
+              setCurrentPage((prev) => (prev <= 1 ? prev : prev - 1));
+            }}
           >
             Prev
           </a>
@@ -65,25 +66,29 @@ function Pagination({ pages = 10, setCurrentPage }) {
         {arrOfCurrButtons.map((item, index) => (
           <li
             key={index}
-            className={`page-item ${currentButton === item ? "active" : ""}`}
+            className={`page-item ${currentPage === item ? "active" : ""}`}
           >
             <a
               href="#"
               className="page-link"
-              onClick={() => setCurrentButton(item)}
+              onClick={(e) => {
+                e.preventDefault();
+                setCurrentPage(item);
+              }}
             >
               {item}
             </a>
           </li>
         ))}
 
-        <li className={`page-item ${currentButton === numberOfPages.length ? "disabled" : ""}`}>
+        <li className={`page-item ${currentPage === numberOfPages.length ? "disabled" : ""}`}>
           <a
             href="#"
             className="page-link"
-            onClick={() =>
-              setCurrentButton((prev) => (prev >= numberOfPages.length ? prev : prev + 1))
-            }
+            onClick={(e) => {
+              e.preventDefault(); 
+              setCurrentPage((prev) => (prev >= numberOfPages.length ? prev : prev + 1));
+            }}
           >
             Next
           </a>
