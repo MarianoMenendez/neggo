@@ -1,6 +1,7 @@
 
 import { Link, useNavigate } from "react-router-dom";
 import CardsContainer from "../../components/cardsContainer/CardsContainer";
+import Pagination from "../../components/pagination/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductrToOrder } from "../../redux/actions";
 
@@ -9,6 +10,7 @@ export default function Cart() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const handleClick = () => {
+        console.log(products)
         dispatch(addProductrToOrder(products))
         navigate('/order')
     }
