@@ -1,22 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CardsContainer from "../../components/cardsContainer/CardsContainer";
-import useStoreMount from "./useStoreMount";
+import CategoryList from "../../components/categoryList/categoryList";
+import useStoreMount from "../../services/useStoreMount";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Pagination from "../../components/pagination/Pagination";
-
+import { useCategoryFilter } from "../../services/useCategoryFilter";
 export default function AdminPanel() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(12);
 
+  //Lista de productos filtrados
+  useStoreMount();
+  const products = useSelector((state) => state.products);
+  const [productList, setProductList] = useState([])
+  useCategoryFilter(products,setProductList)
+
+  //Lista de paginas del paginado --> Hay que hacerlo en una función aparte y dentro de un useEffect para que actualice el paginado
+  
+  const [postsPerPage] = useState(12);
+  const [currentPage, setCurrentPage] = useState(1);
+  const howManyPages = Math.ceil(productList.length/postsPerPage);
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
 
-  useStoreMount();
-  const products = useSelector((state) => state.products);
-  const howManyPages = Math.ceil(products.length / postsPerPage);
-
-  if (!products || products.length === 0) {
+  
+  if (!productList || productList.length === 0) { // esto funciona??? porque el array siempre existe
     return <div>Loading...</div>;
   }
 
@@ -24,7 +31,8 @@ export default function AdminPanel() {
     <div>
       <h1>HOLI SOY EL ADMIN PANEL</h1>
       <Link to="/cart">Carrito</Link>
-      <CardsContainer products={products.slice(indexOfFirstPost, indexOfLastPost)} />
+      <CategoryList products={products}/>
+      <CardsContainer products={productList.slice(indexOfFirstPost, indexOfLastPost)} />
       <Pagination pages={howManyPages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
     </div>
   );

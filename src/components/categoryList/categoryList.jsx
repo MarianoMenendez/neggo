@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { useDispatch } from 'react-redux';
+import { setCategoryFilter } from "../../redux/actions"
+function CategoryList({products}) {
 
-function CategoryList({products, setCatFilter}) {
   const [categoryList, setCategoryList] = useState([])
-  console.log(typeof setCatFilter)
-
+  const dispatch = useDispatch()
   useEffect(()=>{
     const cats = []
     products?.forEach(element => {
@@ -13,11 +13,10 @@ function CategoryList({products, setCatFilter}) {
     })
     const catsSet = new Set(cats)
     setCategoryList(Array.from(catsSet))
-
   },[products])
   return (
     <ListGroup style={{display: "flex", flexDirection: "row"}}>
-      {categoryList?.map(category=> <ListGroup.Item id={category} onClick={(e)=>{setCatFilter(e.target.id)}}>{category}</ListGroup.Item>)}
+      {categoryList?.map(category=> <ListGroup.Item id={category} onClick={(e)=>{dispatch(setCategoryFilter(e.target.id))}}>{category}</ListGroup.Item>)}
     </ListGroup> 
   );
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { getProductsByName } from "../../redux/actions";
+import { getProductsByName , saveProductNameFilter} from "../../redux/actions";
 import { useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import styles from "./SearchBar.module.css"
@@ -8,11 +8,10 @@ import styles from "./SearchBar.module.css"
 
 /*Estableces el valor que se está escribiendo en el input*/
 export default function SerchBar() {
-
     const [productName, setProductName] = useState("") /*Creo un estado para que vaya tomando el valor que vamos escribiendo en el input y luego pueda usar para buscar al personaje*/
     // const [productList, setProductList] = useState([]) /*Creo un estado para que vaya mostrando la lista de paises buscados en la db que van coincidiendo con el escrito*/
     const [error, setError] = useState("")
-  
+    
     const dispatch = useDispatch()
     const handleInputChange = (event) => {
         setProductName(()=>{
@@ -29,10 +28,11 @@ export default function SerchBar() {
     const handleSubmit = (event) => {
         if (event.key === "Enter") {
             dispatch(getProductsByName(productName))
+            dispatch(saveProductNameFilter(productName))
             // setProductList([])
         }
     }
-   
+ 
     // const consultaPaises = async (productName) => {
     //    try {
     //         const res = await  axios.get(`http://localhost:3001/products?name=${productName}`)
