@@ -4,9 +4,8 @@ function PaginationMobile({ pages = 10, currentPage, setCurrentPage }) {
   console.log(currentPage, pages);
 
   useEffect(() => {
-    // Verificar si el valor actual de currentPage es mayor que el número total de páginas
     if (currentPage > pages) {
-      setCurrentPage(pages); // Llevar a la última página
+      setCurrentPage(pages);
     }
   }, [currentPage, pages]);
   return (
