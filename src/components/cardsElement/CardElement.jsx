@@ -6,8 +6,8 @@ import { useLocation } from "react-router-dom";
 import imagen from "../../uploads/1688574833806.jpeg"; // Asegúrate de importar la imagen correcta o proporcionar la ruta correcta a la imagen.
 
 export default function CardsElement({ product }) {
-  const products = useSelector((state) => state.cart);
-  console.log(products, "products");
+  const cart = useSelector((state) => state.cart);
+  console.log(cart, "products");
 
   const {
     id,
@@ -46,15 +46,43 @@ export default function CardsElement({ product }) {
           </div>
           {location.pathname !== "/cart" ? (
             <div className="d-flex justify-content-center mt-4">
-              {products.some((product) => product.id === id) ? (
-                <Button
-                  className="btn btn-dark"
-                  variant="primary"
-                  value={id}
-                  onClick={(e) => addToOrder(e)}
-                >
-                  Agregar mas
-                </Button>
+              {cart.some((product) => product.id === id) ? (
+                <div>
+                <InputGroup className="mb-3">
+                  <Button
+                    variant="outline-secondary"
+                    value={id}
+                    onClick={(e) =>
+                      count > 0 &&
+                      dispatch(setQuantityToCart(e.target.value, count - 1))
+                    }
+                  >
+                    -
+                  </Button>
+                  <Form.Control
+                    aria-label="Example text with button addon"
+                    aria-describedby="basic-addon1"
+                    value={count}
+                    onChange={(e) =>
+                      dispatch(
+                        setQuantityToCart(
+                          id,
+                          e.target.value === "" ? 0 : parseInt(e.target.value)
+                        )
+                      )
+                    }
+                  />
+                  <Button
+                    variant="outline-secondary"
+                    value={id}
+                    onClick={(e) =>
+                      dispatch(setQuantityToCart(e.target.value, count + 1))
+                    }
+                  >
+                    +
+                  </Button>
+                </InputGroup>
+              </div>
               ) : (
                 <Button
                   className="btn btn-dark"

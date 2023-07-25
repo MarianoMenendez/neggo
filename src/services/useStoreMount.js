@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getAllProducts } from "../../redux/actions"
+import { getAllProducts } from "../redux/actions"
 
 
 // Ejecuta la consultas iniciales a la api una vez que carga la página y luego evita que esa consulta se realice nuevamente

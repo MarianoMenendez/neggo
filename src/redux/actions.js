@@ -1,4 +1,4 @@
-import {GET_ALL_PRODUCTS, ADD_PRODUCT_TO_CART, ADD_PRODUCTS_TO_ORDER, SET_QUANTITY_TO_CART, GET_PRODUCTS_BY_NAME} from "./action-types";
+import {GET_ALL_PRODUCTS, ADD_PRODUCT_TO_CART, ADD_PRODUCTS_TO_ORDER, SET_QUANTITY_TO_CART, GET_PRODUCTS_BY_NAME, SET_CATEGORY_FILTER, SAVE_PRODUCT_NAME_FILTER} from "./action-types";
 import axios from "axios";
 
 
@@ -34,3 +34,10 @@ export const addProductrToOrder = (products) => {
     return {type: ADD_PRODUCTS_TO_ORDER, payload: products}
 }
 
+export const setCategoryFilter = (category) =>{
+    return {type: SET_CATEGORY_FILTER, payload: category}
+}
+
+export const saveProductNameFilter = (name) => {
+    return {type: SAVE_PRODUCT_NAME_FILTER, payload: name}
+}
