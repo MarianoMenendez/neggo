@@ -8,6 +8,7 @@ import Pagination from "../../components/pagination/Pagination";
 import { useCategoryFilter } from "../../services/useCategoryFilter";
 import style from "./Store.module.css";
 import PaginationMobile from "../../components/paginationMobile/PaginationMobile";
+import ViewCategories from "../../components/viewCategories/ViewCategories";
 
 export default function AdminPanel() {
   //Lista de productos filtrados
@@ -31,29 +32,31 @@ export default function AdminPanel() {
 
   return (
     <div>
-      <h1>HOLI SOY EL ADMIN PANEL</h1>
-      <Link to="/cart">Carrito</Link>
-      <CategoryList products={products} />
-      <CardsContainer
-        products={productList.slice(indexOfFirstPost, indexOfLastPost)}
-      />
 
-      {console.log(productList, "dasdasd")}
+        <ViewCategories className={style.CategoryLists} products={products} />
 
-      <div className={style.pagination}>
-        <Pagination
-          pages={howManyPages}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
+      <div> 
+        <div className="container">
+          <h1 className={style.title}>HOLI SOY EL ADMIN PANEL</h1>
+          <Link to="/cart">Carrito</Link>
+        </div>
+        <CardsContainer
+          products={productList.slice(indexOfFirstPost, indexOfLastPost)}
         />
-      </div>
-
-      <div className={style.paginationMobile}>
-        <PaginationMobile
-          pages={howManyPages}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
+        <div className={style.pagination}>
+          <Pagination
+            pages={howManyPages}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        </div>
+        <div className={style.paginationMobile}>
+          <PaginationMobile
+            pages={howManyPages}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        </div>
       </div>
     </div>
   );

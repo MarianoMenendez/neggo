@@ -1,6 +1,6 @@
 /* Estilos CSS para cambiar el color del elemento seleccionado */
-.selected {
-    background-color: #f0f0f0; /* Cambia el color a tu preferencia */
+.select {
+    background-color: #4a4a4a; /* Cambia el color a tu preferencia */
     /* Agrega otros estilos según tus necesidades */
   }
   
@@ -8,3 +8,17 @@
   .textmodificado{
     font-size: 20px;
   }
+
+
+  /* categoryList.module.css */
+
+/* categoryList.module.css */
+
+/* Estilos para habilitar el desplazamiento en formato mobile */
+@media (max-width: 768px) {
+  .nav-scroller {
+    /* Ajusta la altura máxima para que quepa en la pantalla */
+    max-height: 200px; /* Ajusta este valor según tus necesidades */
+    overflow-y: auto; /* Habilita el desplazamiento vertical */
+  }
+}

@@ -21,3 +21,20 @@
     display: none;
   }
 }
+
+/* Store.module.css */
+.centerButton {
+  z-index: 100;
+  position: absolute;
+  margin-left: 20px;
+}
+
+
+.CategoryLists{
+  z-index: 100;
+}
+
+.title{
+  margin-top: 20px;
+  margin-bottom: 80px;
+}

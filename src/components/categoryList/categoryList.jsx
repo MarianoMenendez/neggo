@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import ListGroup from "react-bootstrap/ListGroup";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setCategoryFilter } from "../../redux/actions";
-import style from "./categoryList.module.css"
+import { Nav } from "react-bootstrap";
+import style from "./categoryList.module.css";
 
 function CategoryList({ products }) {
   const [categoryList, setCategoryList] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,29 +16,50 @@ function CategoryList({ products }) {
     });
     const catsSet = new Set(cats);
     setCategoryList(Array.from(catsSet));
+    const storedSelectedCategories = localStorage.getItem("selectedCategories");
+    if (storedSelectedCategories) {
+      setSelectedCategory(JSON.parse(storedSelectedCategories));
+    }
   }, [products]);
 
+  useEffect(() => {
+    localStorage.setItem("selectedCategories", JSON.stringify(selectedCategory));
+  }, [selectedCategory]);
+
   const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
+    if (selectedCategory.includes(category)) {
+      setSelectedCategory((prevSelectedCategories) =>
+        prevSelectedCategories.filter((cat) => cat !== category)
+      );
+    } else {
+      setSelectedCategory((prevSelectedCategories) => [
+        ...prevSelectedCategories,
+        category,
+      ]);
+    }
     dispatch(setCategoryFilter(category));
   };
 
   return (
-    <div class="nav-scroller py-1 mb-3 border-bottom container mt-5 mb-5">
-      <nav class="nav nav-underline justify-content-between">
+    <div className={`${style.categoryListContainer} d-flex flex-column p-3`}>
+      <Nav className="flex-column centradooo">
         {categoryList?.map((category) => (
-          <ListGroup.Item
+          <Nav.Item
             key={category}
             id={category}
             onClick={() => handleCategoryClick(category)}
-            className={selectedCategory === category ? "selected" : ""}
+            className={selectedCategory.includes(category) ? style.select : ""}
           >
-            <a class="nav-item nav-link link-body-emphasis active" className={style.textmodificado} href="#">
+            <Nav.Link
+              className="nav-item nav-link link-body-emphasis active"
+              href="#"
+              style={{ textDecoration: "none" }}
+            >
               {category}
-            </a>
-          </ListGroup.Item>
+            </Nav.Link>
+          </Nav.Item>
         ))}
-      </nav>
+      </Nav>
     </div>
   );
 }
