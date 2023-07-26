@@ -84,18 +84,21 @@ export default function CardsElement({ product }) {
                 </InputGroup>
               </div>
               ) : (
-                <Button
-                  className="btn btn-dark"
-                  variant="primary"
-                  value={id}
-                  onClick={(e) => addToOrder(e)}
-                >
-                  Agregar al Pedido
-                </Button>
+                <div>
+                  <Button
+                    className="btn btn-dark"
+                    variant="primary"
+                    value={id}
+                    onClick={(e) => addToOrder(e)}
+                  >
+                    Agregar al Pedido
+                  </Button>
+                </div>
               )}
             </div>
           ) : (
             <div>
+              <Card.Text>$ {price*count}</Card.Text>
               <InputGroup className="mb-3">
                 <Button
                   variant="outline-secondary"
