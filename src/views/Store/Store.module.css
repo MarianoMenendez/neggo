@@ -1,0 +1,23 @@
+@media (max-width: 768px) {
+  .pagination {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .paginationMobile {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .category {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .categoryMobile {
+    display: none;
+  }
+}

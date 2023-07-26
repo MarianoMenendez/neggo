@@ -45,7 +45,7 @@ function Pagination({ pages = 10, currentPage, setCurrentPage }) {
     }
 
     setArrOfCurrButtons(tempNumberOfPages);
-  }, [currentPage]);
+  }, [pages, currentPage]);
 
   return (
     <nav aria-label="Page navigation">
@@ -55,7 +55,7 @@ function Pagination({ pages = 10, currentPage, setCurrentPage }) {
             href="#"
             className="page-link"
             onClick={(e) => {
-              e.preventDefault(); 
+              e.preventDefault();
               setCurrentPage((prev) => (prev <= 1 ? prev : prev - 1));
             }}
           >
@@ -81,13 +81,19 @@ function Pagination({ pages = 10, currentPage, setCurrentPage }) {
           </li>
         ))}
 
-        <li className={`page-item ${currentPage === numberOfPages.length ? "disabled" : ""}`}>
+        <li
+          className={`page-item ${
+            currentPage === numberOfPages.length ? "disabled" : ""
+          }`}
+        >
           <a
             href="#"
             className="page-link"
             onClick={(e) => {
-              e.preventDefault(); 
-              setCurrentPage((prev) => (prev >= numberOfPages.length ? prev : prev + 1));
+              e.preventDefault();
+              setCurrentPage((prev) =>
+                prev >= numberOfPages.length ? prev : prev + 1
+              );
             }}
           >
             Next

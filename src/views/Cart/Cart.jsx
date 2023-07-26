@@ -10,7 +10,6 @@ export default function Cart() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const handleClick = () => {
-        console.log(products)
         dispatch(addProductrToOrder(products))
         navigate('/order')
     }
