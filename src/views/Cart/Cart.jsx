@@ -4,21 +4,37 @@ import CardsContainer from "../../components/cardsContainer/CardsContainer";
 import Pagination from "../../components/pagination/Pagination";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductrToOrder } from "../../redux/actions";
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+import { useState } from "react";
+import ConfirmationModal from "../Confirmation/ConfirmationModal";
 
 export default function Cart() {    
+    const [modal, setModal] = useState(0)
     const products = useSelector(state => state.cart)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const handleClick = () => {
         dispatch(addProductrToOrder(products))
-        navigate('/order')
+        setModal(1)
     }
     return(
     <div>
-        <h1>HOLI SOY EL CARRITO</h1>
-        <Link to="/">x</Link>
+        <Navbar className="bg-body-tertiary">
+        <Container>
+          <Navbar.Brand href="/">
+            <img src="" alt="" />
+          </Navbar.Brand>
+        </Container>
+        <Container>
+          <Navbar.Brand href="/">
+            x
+          </Navbar.Brand>
+        </Container>
+      </Navbar>
         <CardsContainer products={products}/>
         <button onClick={() => handleClick() }>Confirmar Pedido</button>
+   {modal && <ConfirmationModal setModal={setModal}/>}
     </div>
     )
 }

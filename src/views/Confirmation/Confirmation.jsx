@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react"
-import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import style from "./Confirmation.module.css"
 import Table from 'react-bootstrap/Table';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
-import NavFlow from "../../components/nav/Nav"
 import Button from "react-bootstrap/esm/Button";
+import bag from "../../uploads/bag.png"
 
 
-
-export default function Confirmation() {
+export default function ConfirmationForm() {
   // Estados locales
-    const [inputs, setInputs] = useState({})
+  const [inputs, setInputs] = useState({})
     const [errors, setErrors] = useState({})
     const [total, setTotal] = useState(0)
+    const [totalCount, setTotalCount] = useState(0)
     const order = useSelector(state => state.order)
     const products = useSelector(state => state.cart)
     const dispatch = useDispatch()
@@ -27,12 +26,25 @@ export default function Confirmation() {
     }
     useEffect(()=>{
     let tot = 0
-    products.forEach(element => {tot += element.count*element.price})
+    let totCount = 0
+    products.forEach(element => {
+      tot += element.count*element.price
+      totCount += element.count
+    })
     setTotal(tot)
+    setTotalCount(totCount)
+
   },[products])
     return(
+      <div>
+      {/* <div className={style.bagContainer}>
+        <img className={style.bag} src={bag}/>
+        <div className={style.orderTotals}>
+        <span >Total: $ {total}</span>
+        <span>{totalCount} Artículos</span>
+        </div>
+      </div> */}
       <div className={style.confirmationContainer}>
-        <NavFlow></NavFlow>       
         <Form style={{ padding: '15px' }} onSubmit={(e) => handleSubmit(e)} >
           <span className={style.formTitele}>Contacto</span>
           <div >
@@ -72,6 +84,7 @@ export default function Confirmation() {
         <Button className={style.submitButton} type='submit' variant="primary" size="lg">Enviar Pedido $ {total} </Button>
       </Form>
   </div> 
+  </div>
   )
 }
 
@@ -104,3 +117,4 @@ export default function Confirmation() {
     </Table>
     <strong><span>Total: </span><text>${total}</text></strong>
   </div> */
+
