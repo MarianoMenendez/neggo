@@ -6,7 +6,7 @@ import Table from 'react-bootstrap/Table';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import NavFlow from "../../components/nav/Nav"
-
+import Button from "react-bootstrap/esm/Button";
 
 
 
@@ -32,41 +32,45 @@ export default function Confirmation() {
     setTotal(tot)
   },[products])
     return(
-      <div>
+      <div className={style.confirmationContainer}>
         <NavFlow></NavFlow>       
-        <Form onSubmit={(e) => handleSubmit(e)} >
-          <h2 >Necesitamos algunos datos</h2>
+        <Form style={{ padding: '15px' }} onSubmit={(e) => handleSubmit(e)} >
+          <span className={style.formTitele}>Contacto</span>
           <div >
-            <div>
-              <label htmlFor="nombre">Nombre Completo:</label>
+            <div className={style.inputForm}>
+              <label htmlFor="nombre">Nombre completo</label>
               <Form.Control name="name" placeholder='Escriba su nombre completo...' type="text" value={inputs.name}
                   onChange={(e) => handleInputChange(e)}
                 />
+              <div>
+                {errors.name && <p >{errors.name}</p> }
+              </div> 
             </div>
-            <div >
-            {errors.name && <p >{errors.name}</p> }
-            </div> 
             <div>
-              <label htmlFor="phoneCode">Celular:</label>
-              <InputGroup>
-                <InputGroup.Text>+54</InputGroup.Text>
-                <Form.Control placeholder="011" name="phoneCode" type="text" value={inputs.phoneCode} onChange={(event) => handleInputChange(event, inputs, setInputs, setErrors)}/>
-                <Form.Control placeholder="15 1234 5678" name="phoneNumber" type="text" value={inputs.phoneNumber}
-                  onChange={(event) => handleInputChange(event, inputs, setInputs, setErrors)}/>
-              </InputGroup>
-                {/* <input className={style.formNombreInput} name="phoneCode" placeholder='011' type="text" value={inputs.phoneCode}
-                  onChange={(event) => handleInputChange(event, inputs, setInputs, setErrors)}
-                />
-                <input className={style.formNombreInput} name="phoneNumber" placeholder='15 1234 5678' type="text" value={inputs.phoneNumber}
-                  onChange={(event) => handleInputChange(event, inputs, setInputs, setErrors)}
-                /> */}
+              <div className={style.inputForm}>
+                <label htmlFor="phoneCode">Celular</label>
+                <div>
+                  <InputGroup >
+                    <InputGroup.Text>+54</InputGroup.Text>
+                    <Form.Control className={style.inputPhoneCode} placeholder="011" name="phoneCode" type="text" value={inputs.phoneCode} onChange={(event) => handleInputChange(event, inputs, setInputs, setErrors)}/>
+                    <Form.Control placeholder="15 1234 5678" name="phoneNumber" type="text" value={inputs.phoneNumber}
+                      onChange={(event) => handleInputChange(event, inputs, setInputs, setErrors)}/>
+                  </InputGroup>
+                </div>
+                  {/* <input className={style.formNombreInput} name="phoneCode" placeholder='011' type="text" value={inputs.phoneCode}
+                    onChange={(event) => handleInputChange(event, inputs, setInputs, setErrors)}
+                  />
+                  <input className={style.formNombreInput} name="phoneNumber" placeholder='15 1234 5678' type="text" value={inputs.phoneNumber}
+                    onChange={(event) => handleInputChange(event, inputs, setInputs, setErrors)}
+                  /> */}
+              </div>
+              <div >
+                {errors.name && <p >{errors.name}</p> }
+              </div>
             </div>
-            <div >
-            {errors.name && <p >{errors.name}</p> }
-            </div> 
-        </div>
-        <button type='submit'>Enviar</button>
-        
+             
+          </div>
+        <Button className={style.submitButton} type='submit' variant="primary" size="lg">Enviar Pedido $ {total} </Button>
       </Form>
   </div> 
   )
