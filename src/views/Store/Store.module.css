@@ -1,0 +1,40 @@
+@media (max-width: 768px) {
+  .pagination {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .paginationMobile {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .category {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .categoryMobile {
+    display: none;
+  }
+}
+
+/* Store.module.css */
+.centerButton {
+  z-index: 100;
+  position: absolute;
+  margin-left: 20px;
+}
+
+
+.CategoryLists{
+  z-index: 100;
+}
+
+.title{
+  margin-top: 20px;
+  margin-bottom: 80px;
+}

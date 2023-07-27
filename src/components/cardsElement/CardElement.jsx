@@ -7,8 +7,7 @@ import imagen from "../../uploads/1688574833806.jpeg"; // Asegúrate de importar
 
 export default function CardsElement({ product }) {
   const cart = useSelector((state) => state.cart);
-  console.log(cart, "products");
-
+  
   const {
     id,
     external_code,

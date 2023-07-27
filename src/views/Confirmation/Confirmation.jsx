@@ -21,7 +21,6 @@ export default function Confirmation() {
     
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log({...inputs,...order})
     }
     const handleInputChange = (e) => {
       setInputs({...inputs, [e.target.name]: e.target.value})
