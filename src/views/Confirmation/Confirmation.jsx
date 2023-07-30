@@ -37,16 +37,8 @@ export default function ConfirmationForm() {
   },[products])
     return(
       <div>
-      {/* <div className={style.bagContainer}>
-        <img className={style.bag} src={bag}/>
-        <div className={style.orderTotals}>
-        <span >Total: $ {total}</span>
-        <span>{totalCount} Artículos</span>
-        </div>
-      </div> */}
       <div className={style.confirmationContainer}>
-        <Form style={{ padding: '15px' }} onSubmit={(e) => handleSubmit(e)} >
-          <span className={style.formTitele}>Contacto</span>
+        <Form onSubmit={(e) => handleSubmit(e)} >
           <div >
             <div className={style.inputForm}>
               <label htmlFor="nombre">Nombre completo</label>
@@ -81,7 +73,7 @@ export default function ConfirmationForm() {
             </div>
              
           </div>
-        <Button className={style.submitButton} type='submit' variant="primary" size="lg">Enviar Pedido $ {total} </Button>
+        <Button style={{width: "-webkit-fill-available"}} className={style.submitButton} type='submit' variant="primary" size="lg">Enviar Pedido $ {total} </Button>
       </Form>
   </div> 
   </div>

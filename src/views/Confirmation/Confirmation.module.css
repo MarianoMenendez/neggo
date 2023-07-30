@@ -1,5 +1,4 @@
 .confirmationContainer{
-    height: 100vh;
 }
 .bagContainer{
     display: flex;
@@ -33,11 +32,10 @@
 }
 
 .submitButton{
-    margin-top: 30px;
-    width: 80%;
-    font-size: 18px;
-    font-weight: 500;
-    border-radius: 20px;
-    background-color: black;
-    border-color: black;
+    margin-top: 20px !important; 
+    font-size: 18px !important;
+    font-weight: 500 !important;
+    border-radius: 20px !important;
+    background-color: black !important;
+    border-color: black !important;
 }

@@ -41,7 +41,7 @@ function CategoryList({ products }) {
   };
 
   return (
-    <div className={`${style.categoryListContainer} d-flex flex-column p-3`}>
+    <div  className={`${style.categoryListContainer} d-flex flex-column p-3`}>
       <Nav className="flex-column centradooo">
         {categoryList?.map((category) => (
           <Nav.Item

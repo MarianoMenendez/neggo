@@ -3,6 +3,7 @@ import { Button } from "react-bootstrap";
 import CategoryList from "../categoryList/categoryList";
 import style from "./ViewCategories.module.css";
 import "animate.css";
+import filter from "../../uploads/filter.png"
 
 export default function ViewCategories({ products }) {
   const [showCategories, setShowCategories] = useState(false);
@@ -55,6 +56,7 @@ export default function ViewCategories({ products }) {
       {showCategories && (
         <div
           ref={categoriesContainerRef}
+          style={{left: "0px"}}
           className={`animate__animated ${
             showCategories ? "animate__fadeInLeft" : "animate__fadeOutRight"
           } d-flex flex-column flex-shrink-0 p-3 bg-white border position-absolute z-3`}
@@ -64,13 +66,7 @@ export default function ViewCategories({ products }) {
       )}
 
       <div className={style.buttonContainer}>
-        <Button
-          className={style.buttonFlex}
-          variant="primary"
-          onClick={handleClick}
-        >
-          {showCategories ? "Ocultar categorías" : "Mostrar categorías"}
-        </Button>
+          {showCategories ? <img src={filter} onClick={handleClick} style={{height: "30px"}}/> : <img src={filter} onClick={handleClick} style={{height: "30px"}}/>}
       </div>
     </div>
   );

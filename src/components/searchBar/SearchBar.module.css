@@ -3,35 +3,36 @@
 body{
   background: #f2f2f2;
   font-family: 'Open Sans', sans-serif;
+  
 }
 
 .search {
-  width: auto;
+  width: -webkit-fill-available;
   position: relative;
   display: flex;
   padding: 5px;
 }
 
 .searchTerm {
-  width: 150px;
-  border: 3px solid #143c6c;
+  width: 80%;
+  border: 3px solid black;
   border-right: none;
-  padding: 5px;
+  padding: 12px;
   height: 14px;
   border-radius: 5px 0 0 5px;
   outline: none;
-  color: #9DBFAF;
+  color: black;
 }
 
 .searchTerm:focus{
-  color: #00B4CC;
+  color: black;
 }
 
 .searchButton {
   width: 30px;
   height: 30px;
-  border: 1px solid #143c6c;
-  background: #143c6c;
+  border: 1px solid black;
+  background: black;
   text-align: center;
   color: #fff;
   border-radius: 0 5px 5px 0;
@@ -41,7 +42,13 @@ body{
 
 /*Resize the wrap to see the search bar change!*/
 .wrap{
+  position: fixed;
+  z-index: 1;
+  top: 50px;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .errorContainer{
@@ -53,4 +60,45 @@ body{
 .errorText{
   margin: 0px;
   padding-left: 15px;
+}
+
+@media (max-width: 768px) {
+  .pagination {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .paginationMobile {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .category {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .categoryMobile {
+    display: none;
+  }
+}
+
+/* Store.module.css */
+.centerButton {
+  z-index: 100;
+  position: absolute;
+  margin-left: 20px;
+}
+
+
+.CategoryLists{
+  z-index: 100;
+}
+
+.title{
+  margin-top: 20px;
+  margin-bottom: 80px;
 }

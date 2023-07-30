@@ -8,21 +8,22 @@ import { InputGroup } from 'react-bootstrap';
 import ConfirmationForm from './Confirmation';
 
 
-function ConfirmationModal({setModal}) {
+function ConfirmationModal({setShow}) {
+  const handleClose = () => setShow(false);
     return (
       <div
         className="modal show"
         style={{ display: 'block', position: 'initial' }}
       >
-        <Modal.Dialog>
+        <Modal style={{ padding: '0' }} show="true" onHide={handleClose}>
           <Modal.Header closeButton >
             <Modal.Title>Contacto</Modal.Title>
           </Modal.Header>
   
           <Modal.Body>
-          <ConfirmationForm/>
+            <ConfirmationForm/>
           </Modal.Body>
-        </Modal.Dialog>
+        </Modal>
       </div>
     );
   }
