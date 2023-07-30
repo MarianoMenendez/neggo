@@ -9,7 +9,10 @@ import { useCategoryFilter } from "../../services/useCategoryFilter";
 import style from "./Store.module.css";
 import PaginationMobile from "../../components/paginationMobile/PaginationMobile";
 import ViewCategories from "../../components/viewCategories/ViewCategories";
-
+import { Container, Navbar } from "react-bootstrap";
+import cart from "../../uploads/cart.png"
+import shower from "../../uploads/shower.png"
+import SerchBar from "../../components/searchBar/SearchBar";
 export default function AdminPanel() {
   //Lista de productos filtrados
   useStoreMount();
@@ -32,15 +35,18 @@ export default function AdminPanel() {
 
   return (
     <div>
-
-        <ViewCategories className={style.CategoryLists} products={products} />
-
-      <div> 
-        <div className="container">
-          <h1 className={style.title}>HOLI SOY EL ADMIN PANEL</h1>
-          <Link to="/cart">Carrito</Link>
-        </div>
+      <Navbar className="bg-body-tertiary" style={{position: "fixed", zIndex: "3", top: "0px", width: "100%"}} >
+        <Container>        
+          <Link to="/" ><img src={shower} alt="" style={{height: "30px"}}/></Link>
+        </Container>
+        <Container style={{justifyContent: "flex-end"}}>
+          <Link to="/cart" ><img src={cart} alt="" style={{height: "30px"}}/></Link>
+        </Container>
+      </Navbar>
+      <div > 
+      <SerchBar products={products} style={{position: "fixed", zIndex: "2", top: "50px"}} ></SerchBar>
         <CardsContainer
+          
           products={productList.slice(indexOfFirstPost, indexOfLastPost)}
         />
         <div className={style.pagination}>

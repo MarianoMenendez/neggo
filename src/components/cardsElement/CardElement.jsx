@@ -1,4 +1,5 @@
 import React from "react";
+import style from "./CardElement.module.css"
 import { Button, Card, Form, InputGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { addProductToCart, setQuantityToCart } from "../../redux/actions";
@@ -28,20 +29,25 @@ export default function CardsElement({ product }) {
   }
 
   return (
-    <div style={{ display: "flex" }}>
+    <div>
       <Card
-        style={{ width: "30rem", height: "30rem", margin: "0.5rem" }}
-        id={id}
+        style={{width: "100%", height: "150px", marginBottom: "10px", border: "none", borderBottom: "1px solid grey"}}
+        id={id}S
       >
-        <Card.Body className="text-center">
-          <Card.Title>{name}</Card.Title>
-          <Card.Text>$ {price}</Card.Text>
-          <div style={{ maxWidth: "40%", overflow: "hidden", margin: "auto" }}>
+        <Card.Body className={style.carta} style={{display: "flex"}}>
+          <div style={{overflow: "hidden", marginRight: "15px"}}>
             <img
               src={imagen}
               alt={`img of ${name}`}
-              style={{ width: "100%", minWidth: "60px", objectFit: "cover" }}
+              style={{ width: "150px", height: "150px", minWidth: "60px"}}
             />
+          </div>
+          <div style={{width: "54%", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
+          <Card.Title style={{height: "50px"}}>{name}</Card.Title>
+          <div style={{display: "flex", justifyContent: "space-between"}}>
+            <span style={{fontWeight: "bold"}}>$ {price}</span>
+            {location.pathname === "/cart" ? 
+            <span> Subtotal $ {price*count}</span> : null }
           </div>
           {location.pathname !== "/cart" ? (
             <div className="d-flex justify-content-center mt-4">
@@ -83,14 +89,16 @@ export default function CardsElement({ product }) {
                 </InputGroup>
               </div>
               ) : (
-                <Button
-                  className="btn btn-dark"
-                  variant="primary"
-                  value={id}
-                  onClick={(e) => addToOrder(e)}
-                >
-                  Agregar al Pedido
-                </Button>
+                <div>
+                  <Button
+                    className="btn btn-dark"
+                    variant="primary"
+                    value={id}
+                    onClick={(e) => addToOrder(e)}
+                  >
+                    Agregar al Pedido
+                  </Button>
+                </div>
               )}
             </div>
           ) : (
@@ -131,6 +139,7 @@ export default function CardsElement({ product }) {
               </InputGroup>
             </div>
           )}
+        </div>
         </Card.Body>
       </Card>
     </div>

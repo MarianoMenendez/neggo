@@ -10,22 +10,20 @@ export default function CardsContainer({ products }) {
   return (
     <div>
       {location.pathname === "/" ? (
-        <div className="d-flex flex-wrap justify-content-center">
+        <div style={{marginTop: "100px"}}>
           {products?.map((product) => (
             <CardElement
               key={product.id}
-              product={product}
-              className="flex-grow-1 mx-2 my-2"
+              product={product}        
             />
           ))}
         </div>
       ) : (
-        <div className="d-flex flex-wrap justify-content-center">
+        <div >
           {products?.map((product) => (
             <CardElement
               key={product.id}
               product={product}
-              className="flex-grow-1 mx-2 my-2"
             />
           ))}
         </div>
