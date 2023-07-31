@@ -10,8 +10,8 @@ import style from "./Store.module.css";
 import PaginationMobile from "../../components/paginationMobile/PaginationMobile";
 import ViewCategories from "../../components/viewCategories/ViewCategories";
 import { Container, Navbar } from "react-bootstrap";
-import cart from "../../uploads/cart.png"
-import shower from "../../uploads/shower.png"
+import cart from "../../uploads/cart.png";
+import shower from "../../uploads/shower.png";
 import SerchBar from "../../components/searchBar/SearchBar";
 export default function AdminPanel() {
   //Lista de productos filtrados
@@ -35,20 +35,33 @@ export default function AdminPanel() {
 
   return (
     <div>
-      <Navbar className="bg-body-tertiary" style={{position: "fixed", zIndex: "3", top: "0px", width: "100%"}} >
-        <Container>        
-          <Link to="/" ><img src={shower} alt="" style={{height: "30px"}}/></Link>
+      <Navbar
+        className="bg-body-tertiary"
+        style={{ position: "fixed", zIndex: "3", top: "0px", width: "100%" }}
+      >
+        <Container>
+          <Link to="/">
+            <img src={shower} alt="" style={{ height: "30px" }} />
+          </Link>
         </Container>
-        <Container style={{justifyContent: "flex-end"}}>
-          <Link to="/cart" ><img src={cart} alt="" style={{height: "30px"}}/></Link>
+        <Container style={{ justifyContent: "flex-end" }}>
+          <Link to="/cart">
+            <img src={cart} alt="" style={{ height: "30px" }} />
+          </Link>
         </Container>
       </Navbar>
-      <div > 
-      <SerchBar products={products} style={{position: "fixed", zIndex: "2", top: "50px"}} ></SerchBar>
-        <CardsContainer
-          
-          products={productList.slice(indexOfFirstPost, indexOfLastPost)}
-        />
+      <div>
+        <SerchBar
+          products={products}
+          style={{ position: "fixed", zIndex: "2", top: "50px" }}
+        ></SerchBar>
+
+          <div className={style.centeredContainer}>
+            <CardsContainer
+              products={productList.slice(indexOfFirstPost, indexOfLastPost)}
+            />
+          </div>
+
         <div className={style.pagination}>
           <Pagination
             pages={howManyPages}

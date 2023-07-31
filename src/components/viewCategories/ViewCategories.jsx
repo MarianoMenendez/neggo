@@ -51,6 +51,7 @@ export default function ViewCategories({ products }) {
     };
   }, [showCategories]);
 
+
   return (
     <div className="d-flex flex-nowrap">
       {showCategories && (
