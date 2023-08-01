@@ -6,7 +6,7 @@ import styles from "./SearchBar.module.css";
 import ViewCategories from "../viewCategories/ViewCategories";
 
 /*Estableces el valor que se está escribiendo en el input*/
-export default function SerchBar({products}) {
+export default function SerchBar({ products }) {
   const [productName, setProductName] =
     useState(
       ""
@@ -85,7 +85,7 @@ export default function SerchBar({products}) {
         </datalist>
         {/*Cuando usamos el onClick y debemos pasar un parametro para que la función no se ejecute cada vez que re renderiza la página*/}
       </div>
-      <ViewCategories className={styles.CategoryLists} products={products} style={{justifyContent: "right"}} />
+      <ViewCategories className={styles.CategoryLists} products={products} />
     </div>
   );
 }

@@ -1,0 +1,12 @@
+/* CardsContainer.module.css */
+.cardsContainer {
+  display: flex;
+  justify-content: center;
+  background-color: wheat;
+  max-width: 1700px; /* Establece el ancho máximo deseado */
+}
+
+.cardElement{
+  background-color: white;
+  
+}
